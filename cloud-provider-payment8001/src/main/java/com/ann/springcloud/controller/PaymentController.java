@@ -20,13 +20,13 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/create")
-    public CommonResult create(Payment payment) {
+    public CommonResult create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
         log.info("------插入结果：" + result);
         return result >0 ? new CommonResult(200,"插入数据库成功",result) : new CommonResult(400,"插入数据库失败",null);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable Long id){
         Payment payment = paymentService.getPaymentById(id);
         int a = 10000/5;
