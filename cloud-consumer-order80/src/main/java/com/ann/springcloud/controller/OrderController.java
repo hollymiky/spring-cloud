@@ -19,7 +19,11 @@ import javax.annotation.Resource;
 @RequestMapping("/consumer")
 public class OrderController {
 
-    public static final String PAYMENT_URL = "http://localhost:8001";
+    //  单机版写死的请求ip+端口可行，集群的话就不可用了
+    //public static final String PAYMENT_URL = "http://localhost:8001";
+
+    //  集群的话，只需要提供微服务的名称，去注册中心去找
+    public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
 
     @Resource
     private RestTemplate restTemplate;
