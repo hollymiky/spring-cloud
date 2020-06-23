@@ -17,11 +17,23 @@ spring:
           uri: lb://CLOUD-PAYMENT-SERVICE
           predicates:
             - Path=/payment/get/**    # 断言，路径相匹配的进行路由
+            #- After=2020-06-22T22:24:52.168+08:00[Asia/Shanghai] # 达到规定时间之后才能访问
+            #- Before=2020-06-22T21:24:52.168+08:00[Asia/Shanghai] # 规定时间之前才能访问
+            #- Between=2020-06-22T21:24:52.168+08:00[Asia/Shanghai],2020-06-22T22:24:52.168+08:00[Asia/Shanghai] # 规定时间之内才能访问
+            #- Cookie=username,longquan  # 必须带着含有username=longquan 的cookie信息才能访问 curl http://localhost:9527/payment/get/1 --cookie "username=longquan"
+            #- Header=X-Request-Id,\d+    # 请求头要有X-Request-Id属性并且值为整数的正则表达式 curl http://localhost:9527/payment/get/1 -H "X-Request-Id=123"
+            #- Host=**.ann.com   # Host 必须含有**.ann.com才能访问
+            #- Method=POST       # 请求方法必须为POST才能访问
+            #- Query=username     # 请求参数中必须包含username才能访问
+            #- RemoteAddr=192.168.1.1/24 # 匹配IP地址才能访问
+            #- Weight=group1, 2    # 百分20的流量转发到lb://CLOUD-PAYMENT-SERVICE
         - id: payment_routh2
           #uri: http://localhost:8001
           uri: lb://CLOUD-PAYMENT-SERVICE
           predicates:
             - Path=/payment/lb/**
+          #filters:
+            #- AddRequestHeader=X-Request-Id, 1024   # 过滤器工厂会在匹配的请求头上加一对请求头，名称为X-Request-Id值为1024
 
 eureka:
   instance:
