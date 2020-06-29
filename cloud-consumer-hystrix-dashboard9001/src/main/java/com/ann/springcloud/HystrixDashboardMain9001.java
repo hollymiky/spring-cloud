@@ -11,6 +11,13 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 @EnableHystrixDashboard
 public class HystrixDashboardMain9001 {
 
+    /**
+     * localhost:9001/hystrix
+     *
+     * 监控：localhost:8001/hystrix.stream
+     * @param args
+     */
+
     public static void main(String[] args) {
         SpringApplication.run(HystrixDashboardMain9001.class, args);
     }
