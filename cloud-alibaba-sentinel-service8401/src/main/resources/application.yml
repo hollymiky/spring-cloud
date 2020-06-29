@@ -14,7 +14,16 @@ spring:
         # 配置sentinel dashboard 地址
         dashboard: localhost:8080
         # 默认8719端口，假如被占用回自动从8719开始一次+1扫面，直至找到未被占用的端口
-        port: 8719
+        port: 8720
+      # 将sentinel配置的规则持久化到nacos中
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            dataId: cloud-alibaba-sentinel-service
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
 
 
 management:
@@ -22,3 +31,6 @@ management:
     web:
       exposure:
         include: '*'
+feign:
+  sentinel:
+    enabled: true
